@@ -1,0 +1,862 @@
+/* ─── Roleplay — cinematic game UI ─── */
+.roleplay-page {
+  --rp-bg-0: #060a14;
+  --rp-bg-1: #0c1224;
+  --rp-bg-2: #121a32;
+  --rp-cyan: #22d3ee;
+  --rp-cyan-dim: rgba(34, 211, 238, 0.45);
+  --rp-violet: #a78bfa;
+  --rp-violet-dim: rgba(167, 139, 250, 0.4);
+  --rp-fuchsia: #e879f9;
+  --rp-amber: #fbbf24;
+  --rp-emerald: #34d399;
+  --rp-rose: #fb7185;
+  --rp-text: #f1f5f9;
+  --rp-muted: #94a3b8;
+  --rp-glass: rgba(12, 18, 36, 0.72);
+  --rp-border: rgba(34, 211, 238, 0.22);
+  --rp-radius: 28px;
+  --rp-shadow: 0 32px 64px rgba(0, 0, 0, 0.55);
+
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: calc(100vh - 64px);
+  color: var(--rp-text);
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.18), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(167, 139, 250, 0.14), transparent 50%),
+    radial-gradient(ellipse 50% 35% at 0% 80%, rgba(232, 121, 249, 0.1), transparent 45%),
+    linear-gradient(165deg, var(--rp-bg-0) 0%, var(--rp-bg-1) 42%, var(--rp-bg-2) 100%);
+}
+
+.roleplay-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+}
+
+.roleplay-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Background orbs */
+.roleplay-page .background-effects {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.roleplay-page .bg-shape {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(90px);
+  animation: rpFloatOrb 18s ease-in-out infinite alternate;
+}
+
+.roleplay-page .shape-one {
+  width: 420px;
+  height: 420px;
+  top: -12%;
+  left: -8%;
+  background: rgba(34, 211, 238, 0.28);
+}
+
+.roleplay-page .shape-two {
+  width: 520px;
+  height: 520px;
+  right: -8%;
+  bottom: -18%;
+  background: rgba(167, 139, 250, 0.26);
+  animation-delay: -6s;
+}
+
+.roleplay-page .shape-three {
+  width: 320px;
+  height: 320px;
+  top: 45%;
+  left: 28%;
+  background: rgba(232, 121, 249, 0.18);
+  animation-delay: -12s;
+}
+
+@keyframes rpFloatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -35px) scale(1.08); }
+}
+
+.roleplay-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem 1.75rem 3.5rem;
+}
+
+/* Header */
+.roleplay-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.75rem;
+}
+
+.roleplay-header .glass-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  color: var(--rp-cyan);
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid var(--rp-cyan-dim);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
+}
+
+.roleplay-header .hologram-effect {
+  animation: rpBadgePulse 3s ease-in-out infinite;
+}
+
+@keyframes rpBadgePulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.12); }
+  50% { box-shadow: 0 0 32px rgba(34, 211, 238, 0.28); }
+}
+
+.roleplay-header .glow-icon {
+  color: var(--rp-cyan);
+  filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.7));
+}
+
+.roleplay-header h1 {
+  margin: 1rem 0 0.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.roleplay-header .text-gradient {
+  display: inline-block;
+  background: linear-gradient(105deg, #67e8f9 0%, #a78bfa 45%, #f0abfc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: rpShimmer 6s linear infinite;
+}
+
+@keyframes rpShimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.roleplay-header p {
+  color: var(--rp-muted);
+  font-size: 1.05rem;
+  margin: 0;
+  line-height: 1.65;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+/* Layout */
+.roleplay-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 340px) minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: start;
+}
+
+/* Glass panels */
+.roleplay-page .glass-panel {
+  position: relative;
+  background: var(--rp-glass);
+  border: 1px solid var(--rp-border);
+  border-radius: var(--rp-radius);
+  backdrop-filter: blur(24px) saturate(1.2);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--rp-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+.roleplay-page .glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rp-cyan), var(--rp-violet), var(--rp-fuchsia));
+  opacity: 0.85;
+}
+
+.roleplay-page .glass-panel::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.06), transparent 70%);
+  pointer-events: none;
+}
+
+.roleplay-page .glass-panel:hover {
+  border-color: rgba(34, 211, 238, 0.38);
+  box-shadow: var(--rp-shadow), 0 0 40px rgba(34, 211, 238, 0.08);
+}
+
+/* Metrics panel */
+.metrics-panel {
+  align-items: center;
+  position: sticky;
+  top: 88px;
+}
+
+.metrics-panel h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--rp-text);
+  text-align: center;
+  width: 100%;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.metrics-panel-sub {
+  font-size: 0.8rem;
+  color: var(--rp-muted);
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.radar-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.06) 0%, transparent 68%);
+  z-index: 1;
+}
+
+.radar-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  border: 1px dashed rgba(34, 211, 238, 0.15);
+  animation: rpRadarSpin 40s linear infinite;
+}
+
+@keyframes rpRadarSpin {
+  to { transform: rotate(360deg); }
+}
+
+.radar-svg {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.15));
+  position: relative;
+  z-index: 1;
+}
+
+.radar-polygon {
+  transition: all 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.35));
+}
+
+.radar-dot {
+  transition: all 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.metrics-note,
+.roleplay-page .hologram-box {
+  margin-top: auto;
+  width: 100%;
+  padding: 1rem 1.1rem;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.06), rgba(167, 139, 250, 0.06));
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  border-radius: 14px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.88rem;
+  color: var(--rp-muted);
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+
+.metrics-note svg {
+  color: var(--rp-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Scenario panel */
+.scenario-panel {
+  min-height: auto;
+}
+
+.scenario-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.scenario-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.scenario-header-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.neon-badge {
+  padding: 0.45rem 1rem;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.06));
+  color: #ddd6fe;
+  border: 1px solid rgba(167, 139, 250, 0.45);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.12);
+}
+
+.difficulty-badge {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.difficulty-easy {
+  color: #6ee7b7;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+.difficulty-medium {
+  color: #fcd34d;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.difficulty-hard {
+  color: #fdba74;
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+}
+
+.difficulty-extreme {
+  color: #fda4af;
+  background: rgba(251, 113, 133, 0.15);
+  border: 1px solid rgba(251, 113, 133, 0.45);
+  box-shadow: 0 0 16px rgba(251, 113, 133, 0.2);
+}
+
+.timer-box {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1.15rem;
+  background: rgba(34, 211, 238, 0.08);
+  color: var(--rp-cyan);
+  border: 1px solid var(--rp-cyan-dim);
+  border-radius: 999px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.08);
+}
+
+.timer-danger {
+  color: #fecaca;
+  background: rgba(251, 113, 133, 0.15);
+  border-color: rgba(251, 113, 133, 0.55);
+  box-shadow: 0 0 28px rgba(251, 113, 133, 0.35);
+  animation: rpTimerPulse 0.7s ease-in-out infinite;
+}
+
+@keyframes rpTimerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* Progress */
+.rp-progress-wrap {
+  margin-bottom: 1.75rem;
+}
+
+.rp-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--rp-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.rp-progress-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rp-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--rp-cyan), var(--rp-violet));
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rp-step-dots {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.65rem;
+  gap: 4px;
+}
+
+.rp-step-dot {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.rp-step-dot.is-done {
+  background: linear-gradient(90deg, var(--rp-cyan), var(--rp-violet));
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.35);
+}
+
+.rp-step-dot.is-current {
+  background: var(--rp-fuchsia);
+  box-shadow: 0 0 10px rgba(232, 121, 249, 0.5);
+}
+
+.scenario-title {
+  font-size: clamp(1.45rem, 2.5vw, 1.85rem);
+  margin-bottom: 0.85rem;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.scenario-desc {
+  font-size: 1.08rem;
+  color: #cbd5e1;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.35rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid var(--rp-violet);
+  border-radius: 0 14px 14px 0;
+}
+
+/* Options */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.hologram-btn {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  padding: 1.15rem 1.35rem 1.15rem 4.25rem;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  color: #e2e8f0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  cursor: pointer;
+  overflow: hidden;
+  animation: rpSlideUp 0.55s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.option-letter {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--rp-cyan);
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hologram-btn:nth-child(2) .option-letter {
+  color: var(--rp-violet);
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+.hologram-btn:nth-child(3) .option-letter {
+  color: var(--rp-fuchsia);
+  background: rgba(232, 121, 249, 0.1);
+  border-color: rgba(232, 121, 249, 0.35);
+}
+
+.hologram-btn:hover {
+  background: rgba(34, 211, 238, 0.06);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(34, 211, 238, 0.12);
+  transform: translateY(-3px);
+  color: #fff;
+}
+
+.hologram-btn:hover .option-letter {
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 0 16px currentColor;
+}
+
+.hologram-btn:active {
+  transform: translateY(-1px);
+}
+
+.btn-scanline {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+
+.hologram-btn:hover .btn-scanline {
+  animation: rpScan 0.75s ease-in-out;
+}
+
+@keyframes rpScan {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+@keyframes rpSlideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Feedback */
+.feedback-box {
+  padding: 2rem 1.75rem;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  margin-top: 0.5rem;
+  line-height: 1.65;
+  animation: rpFeedbackIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes rpFeedbackIn {
+  from { opacity: 0; transform: translateY(-12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.neon-success {
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  color: #6ee7b7;
+  box-shadow: 0 0 48px rgba(52, 211, 153, 0.2), inset 0 0 30px rgba(52, 211, 153, 0.05);
+}
+
+.neon-error {
+  background: rgba(251, 113, 133, 0.1);
+  border: 1px solid rgba(251, 113, 133, 0.45);
+  color: #fda4af;
+  box-shadow: 0 0 48px rgba(251, 113, 133, 0.22);
+  animation: rpShake 0.45s ease-in-out, rpFeedbackIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.neon-warn {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  color: #fde68a;
+  box-shadow: 0 0 48px rgba(251, 191, 36, 0.18);
+}
+
+@keyframes rpShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Game over */
+.game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+  padding: 2rem 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.game-over::before {
+  content: '';
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.2), transparent 70%);
+  top: 10%;
+  pointer-events: none;
+}
+
+.game-over .text-gradient {
+  display: inline-block;
+  background: linear-gradient(105deg, #67e8f9, #c4b5fd, #f0abfc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 900;
+  margin-top: 1.5rem;
+}
+
+.final-desc {
+  color: var(--rp-muted);
+  font-size: 1.05rem;
+  margin: 0.75rem auto 2rem;
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.final-scores {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1.25rem 1.5rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.score-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 1rem;
+}
+
+.score-item:last-child {
+  border-bottom: none;
+}
+
+.score-item strong {
+  color: #fff;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.roleplay-page .glass-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2rem;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roleplay-page .btn-primary-glow {
+  margin-top: 2rem;
+  color: #fff;
+  background: linear-gradient(135deg, #0891b2, #7c3aed);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 36px rgba(8, 145, 178, 0.35);
+}
+
+.roleplay-page .btn-primary-glow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(124, 58, 237, 0.4);
+}
+
+.badge-3d {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  transform-style: preserve-3d;
+  animation: rpFloatBadge 4s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+.badge-3d::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: inherit;
+  filter: blur(28px);
+  opacity: 0.45;
+  z-index: -1;
+}
+
+@keyframes rpFloatBadge {
+  0% { transform: translateY(0) rotateX(6deg); }
+  100% { transform: translateY(-12px) rotateX(10deg); }
+}
+
+.badge-inner {
+  width: 72%;
+  height: 72%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.badge-diamond {
+  background: radial-gradient(circle at 30% 30%, #a5f3fc, #22d3ee, #0369a1);
+  border: 3px solid #7dd3fc;
+  box-shadow: 0 0 60px rgba(34, 211, 238, 0.5);
+}
+
+.badge-gold {
+  background: radial-gradient(circle at 30% 30%, #fef3c7, #fbbf24, #b45309);
+  border: 3px solid #fde68a;
+  box-shadow: 0 0 60px rgba(251, 191, 36, 0.45);
+}
+
+.badge-rust {
+  background: radial-gradient(circle at 30% 30%, #e5e7eb, #6b7280, #1f2937);
+  border: 3px solid #9ca3af;
+  box-shadow: 0 0 40px rgba(107, 114, 128, 0.35);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .roleplay-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-panel {
+    position: static;
+  }
+
+  .scenario-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .roleplay-container {
+    padding: 1.25rem 1rem 2.5rem;
+  }
+
+  .roleplay-page .glass-panel {
+    padding: 1.35rem 1.25rem;
+  }
+
+  .scenario-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .timer-box {
+    justify-content: center;
+  }
+
+  .hologram-btn {
+    padding-left: 3.75rem;
+  }
+
+  .option-letter {
+    width: 2rem;
+    height: 2rem;
+    left: 0.9rem;
+    font-size: 0.82rem;
+  }
+}
