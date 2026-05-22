@@ -8,7 +8,6 @@ import img4 from '../assets/theory-slides/img4.jpg';
 import img5 from '../assets/theory-slides/img5.jpg';
 import img6 from '../assets/theory-slides/img6.jpg';
 import img7 from '../assets/theory-slides/img7.png';
-import img8 from '../assets/theory-slides/img8.jpg';
 
 const slides = [
   {
@@ -212,7 +211,7 @@ const slides = [
     short: 'Vận dụng',
     type: 'conclusion',
     accent: '#fbbf24',
-    image: img8,
+    image: img7,
     summary: 'Sáu cặp phạm trù cơ bản của phép biện chứng duy vật phản ánh những mối liên hệ phổ biến nhất của thế giới khách quan. Các cặp phạm trù không tồn tại riêng rẽ mà luôn tác động và chuyển hóa lẫn nhau.',
     implications: [
       {
