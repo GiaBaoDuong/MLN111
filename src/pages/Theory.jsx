@@ -1,6 +1,14 @@
 import { useState, useEffect} from 'react';
 import { ChevronLeft, ChevronRight, Lightbulb, GitMerge, BookOpen} from 'lucide-react';
 import './Theory.css';
+import img1 from '../assets/theory-slides/img1.jpg';
+import img2 from '../assets/theory-slides/img2.png';
+import img3 from '../assets/theory-slides/img3.jpg';
+import img4 from '../assets/theory-slides/img4.jpg';
+import img5 from '../assets/theory-slides/img5.jpg';
+import img6 from '../assets/theory-slides/img6.jpg';
+import img7 from '../assets/theory-slides/img7.png';
+import img8 from '../assets/theory-slides/img8.jpg';
 
 const slides = [
   {
@@ -10,7 +18,7 @@ const slides = [
     short: 'Nền tảng',
     type: 'intro',
     accent: '#38bdf8',
-    image: '../assets/theory-slides/img1.jpg',
+    image: img1,
     definition: 'Phạm trù triết học là những khái niệm chung nhất, phản ánh những mặt, thuộc tính và mối liên hệ cơ bản, phổ biến nhất của thế giới hiện thực.',
     points: [
       { text: '-> Được hình thành từ quá trình nhận thức và tổng kết thực tiễn lâu dài của nhân loại.' },
@@ -33,7 +41,7 @@ const slides = [
     short: 'Cá thể',
     type: 'pair',
     accent: '#818cf8',
-    image: 'src/assets/theory-slides/img2.png',
+    image: img2,
     termA: {
       name: 'Cái riêng',
       color: '#818cf8',
@@ -46,8 +54,7 @@ const slides = [
       def: 'Là những thuộc tính, đặc điểm, mối liên hệ được lặp lại ở nhiều sự vật, hiện tượng khác nhau.',
       example: '"Sinh viên đều học tập, thi cử, học tín chỉ" — đó là cái chung.',
     },
-    imageConcept:
-      "src/assets/theory-slides/img2.png",
+    imageConcept: img2,
     relations: [
       'Cái chung chỉ tồn tại trong cái riêng, thông qua cái riêng — không có cái chung tồn tại độc lập.',
       'Cái riêng luôn chứa đựng cái chung, đồng thời có những nét đơn nhất không lặp lại.',
@@ -62,7 +69,7 @@ const slides = [
     short: 'Tác động',
     type: 'pair',
     accent: '#f59e0b',
-    image: '../assets/theory-slides/img3.jpg',
+    image: img3,
     termA: {
       name: 'Nguyên nhân',
       color: '#f59e0b',
@@ -75,8 +82,7 @@ const slides = [
       def: 'Là biến đổi xuất hiện do sự tác động của nguyên nhân tạo ra.',
       example: 'Điểm thi cao là kết quả; điểm cao lại tạo ra học bổng — trở thành nguyên nhân mới.',
     },
-    imageConcept:
-      "src/assets/theory-slides/img3.jpg",
+    imageConcept: img3,
     relations: [
       'Nguyên nhân sinh ra kết quả: nguyên nhân bao giờ cũng xuất hiện trước kết quả.',
       'Một nguyên nhân có thể tạo ra nhiều kết quả khác nhau (mưa lớn → ngập nước, kẹt xe, thiệt hại kinh tế).',
@@ -92,7 +98,7 @@ const slides = [
     short: 'Quy luật',
     type: 'pair',
     accent: '#f472b6',
-    image: 'src/assets/theory-slides/img4.jpg',
+    image: img4,
     termA: {
       name: 'Tất nhiên',
       color: '#f472b6',
@@ -105,7 +111,7 @@ const slides = [
       def: 'Là cái không do mối liên hệ bản chất bên trong quyết định — nó có thể xảy ra hoặc không xảy ra, có thể xảy ra thế này hoặc thế khác.',
       example: 'Già nhanh hay chậm bị ảnh hưởng bởi môi trường, thói quen — đó là ngẫu nhiên.',
     },
-    imageConcept: 'src/assets/theory-slides/img4.jpg',
+    imageConcept: img4,
     relations: [
       'Tất nhiên và ngẫu nhiên không tách rời nhau: cái tất nhiên bao giờ cũng biểu hiện ra ngoài thông qua vô số cái ngẫu nhiên.',
       'Trong những điều kiện nhất định, cái ngẫu nhiên có thể chuyển hóa thành cái tất nhiên và ngược lại.',
@@ -120,7 +126,7 @@ const slides = [
     short: 'Thể hiện',
     type: 'pair',
     accent: '#fb923c',
-    image: 'src/assets/theory-slides/img5.jpg',
+    image: img5,
     termA: {
       name: 'Nội dung',
       color: '#fb923c',
@@ -133,7 +139,7 @@ const slides = [
       def: 'Là phương thức tồn tại và biểu hiện của nội dung, là hệ thống các mối liên hệ tương đối bền vững giữa các yếu tố của nội dung.',
       example: 'Trong cuốn sách đó, bố cục, cách trình bày, ngôn ngữ... là hình thức.',
     },
-    imageConcept: 'src/assets/theory-slides/img5.jpg',
+    imageConcept: img5,
     relations: [
       'Nội dung quyết định hình thức: nội dung thay đổi thì hình thức cũng phải thay đổi theo.',
       'Hình thức tác động trở lại nội dung: hình thức phù hợp thúc đẩy, không phù hợp kìm hãm nội dung.',
@@ -149,7 +155,7 @@ const slides = [
     short: 'Cốt lõi',
     type: 'pair',
     accent: '#2dd4bf',
-    image: 'src/assets/theory-slides/img6.jpg',
+    image: img6,
     termA: {
       name: 'Bản chất',
       color: '#2dd4bf',
@@ -162,7 +168,7 @@ const slides = [
       def: 'Là sự biểu hiện ra bên ngoài của bản chất trong những điều kiện xác định.',
       example: 'Nhìn thấy công ty liên tục đăng tin tuyển dụng — đó là hiện tượng quan sát được.',
     },
-    imageConcept: 'src/assets/theory-slides/img6.jpg',
+    imageConcept: img6,
     relations: [
       'Bản chất và hiện tượng thống nhất với nhau: bản chất bao giờ cũng biểu hiện ra thành hiện tượng, hiện tượng bao giờ cũng là biểu hiện của bản chất.',
       'Tuy nhiên hiện tượng không phản ánh đầy đủ bản chất — một bản chất biểu hiện qua nhiều hiện tượng, và hiện tượng đôi khi che đậy hoặc làm sai lệch bản chất.',
@@ -177,7 +183,7 @@ const slides = [
     short: 'Phát triển',
     type: 'pair',
     accent: '#a78bfa',
-    image: 'src/assets/theory-slides/img7.png',
+    image: img7,
     termA: {
       name: 'Hiện thực',
       color: '#a78bfa',
@@ -190,7 +196,7 @@ const slides = [
       def: 'Là cái chưa tồn tại trong thực tế nhưng có những tiền đề, điều kiện để xuất hiện — nó sẽ trở thành hiện thực khi có đủ điều kiện cần thiết.',
       example: 'Sinh viên đó có khả năng tốt nghiệp loại giỏi nếu có kế hoạch và nỗ lực đúng hướng.',
     },
-    imageConcept: 'src/assets/theory-slides/img7.png',
+    imageConcept: img7,
     relations: [
       'Khả năng và hiện thực có quan hệ chặt chẽ, chuyển hóa lẫn nhau: khả năng + điều kiện → hiện thực mới → sinh ra khả năng mới.',
       'Cùng một sự vật ở những điều kiện khác nhau có thể chứa đựng nhiều khả năng khác nhau.',
@@ -206,7 +212,7 @@ const slides = [
     short: 'Vận dụng',
     type: 'conclusion',
     accent: '#fbbf24',
-    image: 'src/assets/theory-slides/img8.jpg',
+    image: img8,
     summary: 'Sáu cặp phạm trù cơ bản của phép biện chứng duy vật phản ánh những mối liên hệ phổ biến nhất của thế giới khách quan. Các cặp phạm trù không tồn tại riêng rẽ mà luôn tác động và chuyển hóa lẫn nhau.',
     implications: [
       {
