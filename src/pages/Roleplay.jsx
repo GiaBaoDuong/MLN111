@@ -114,13 +114,13 @@ const Roleplay = () => {
   const playSound = (type) => {};
 
   useEffect(() => {
-    if (timeLeft > 0 && !feedback && !gameOver) {
+    if (isGameStarted && timeLeft > 0 && !feedback && !gameOver) {
       const timerId = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
       return () => clearTimeout(timerId);
-    } else if (timeLeft === 0 && !feedback && !gameOver) {
+    } else if (isGameStarted && timeLeft === 0 && !feedback && !gameOver) {
       handleTimeout();
     }
-  }, [timeLeft, feedback, gameOver]);
+  }, [timeLeft, feedback, gameOver, isGameStarted]);
 
   const handleTimeout = () => {
     playSound('error');
@@ -134,10 +134,6 @@ const Roleplay = () => {
       tone: 'error',
       msg: 'HẾT GIỜ! Sự chậm trễ của bạn phải trả giá bằng điểm số. Đời sinh viên không chờ đợi ai!',
     });
-
-    setTimeout(() => {
-      moveToNext();
-    }, 2800);
   };
 
   const handleOptionSelect = (option) => {
@@ -149,10 +145,6 @@ const Roleplay = () => {
 
     setMetrics(newMetrics);
     setFeedback(option);
-
-    setTimeout(() => {
-      moveToNext();
-    }, 2800);
   };
 
   const moveToNext = () => {
@@ -306,6 +298,9 @@ const Roleplay = () => {
                   {feedback ? (
                     <div className={`feedback-box animate-fade-in neon-${feedback.tone}`}>
                       <p>{feedback.msg}</p>
+                      <button className="glass-btn btn-next" onClick={moveToNext}>
+                        Tiếp theo →
+                      </button>
                     </div>
                   ) : (
                     <div className="options-list">

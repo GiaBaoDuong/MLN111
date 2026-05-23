@@ -631,12 +631,37 @@
   text-align: center;
   backdrop-filter: blur(16px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 160px;
+  gap: 1.25rem;
+  min-height: auto;
   margin-top: 0.5rem;
   line-height: 1.65;
   animation: rpFeedbackIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feedback-box p {
+  margin: 0;
+}
+
+.feedback-box .btn-next {
+  margin-top: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.feedback-box .btn-next:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
 }
 
 @keyframes rpFeedbackIn {
