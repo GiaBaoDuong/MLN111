@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Theory from './pages/Theory';
 import Roleplay from './pages/Roleplay';
 import AIUsage from './pages/AIUsage';
-import Chatbot from './components/Chatbot';
+
 import './App.css';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Route path="/ai-usage" element={<AIUsage />} />
         </Routes>
       </main>
-      <Chatbot />
+     
     </div>
   );
 }

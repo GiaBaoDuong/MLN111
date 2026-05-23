@@ -450,7 +450,7 @@ export const questionBank = {
       title: 'Thầy rủ nghiên cứu',
       description: 'Thầy mời bạn tham gia đề tài nghiên cứu. Rất hay nhưng bạn đang học kém 2 môn.',
       options: [
-        { text: 'Nhận — nghiên cứu giúp vượt trội so với triệu SV khác, điểm bao giờ cũng cải thiện được sau.', effect: { khaNangPhatTrien: -15 }, tone: 'error', msg: 'Ảo tưởng Khả năng! Hiện thực (2 môn kém) nếu không giải quyết sẽ kéo sụp mọi thứ.' },
+        { text: 'Nhận — nghiên cứu giúp vượt trội so với triệu SV khác, điểm bao giờ cũng cải thiện được sau.', effect: { khaNangPhatTrien: -15 }, tone: 'error', msg: 'Không nhận thức được năng lực hiện tại của bản thân ! Hiện thực (2 môn kém) nếu không giải quyết sẽ kéo sụp mọi thứ.' },
         { text: 'Xin thầy cho tham gia từ kỳ sau khi học tập ổn định hơn.', effect: { khaNangPhatTrien: 25 }, tone: 'success', msg: 'Ưu tiên Hiện thực trước mắt để tạo nền tảng cho Khả năng tương lai.' },
         { text: 'Từ chối hẳn, không tham gia nghiên cứu.', effect: { khaNangPhatTrien: -10 }, tone: 'warn', msg: 'Đóng sập Khả năng phát triển chỉ vì khó khăn nhất thời.' },
       ]
@@ -520,7 +520,7 @@ export const questionBank = {
       title: 'Tranh cãi chính trị trên MXH',
       description: 'Post ý kiến trung lập về vấn đề xã hội. Bị cả 2 phe tấn công.',
       options: [
-        { text: 'Cãi lại cả 2 phe bằng lập luận chi tiết — sự thật chỉ có một và người có lý lẽ vững chắc nhất sẽ thắng mọi cuộc tranh luận.', effect: { nhanThucQuyLuat: -20 }, tone: 'error', msg: 'Ảo tưởng! Tranh luận MXH là Ngẫu nhiên hỗn loạn, không có ai thắng. Bạn chỉ tự kiệt sức.' },
+        { text: 'Cãi lại cả 2 phe bằng lập luận chi tiết — sự thật chỉ có một và người có lý lẽ vững chắc nhất sẽ thắng mọi cuộc tranh luận.', effect: { nhanThucQuyLuat: -20 }, tone: 'error', msg: 'Tranh luận MXH là Ngẫu nhiên hỗn loạn, không có ai thắng. Bạn chỉ tự kiệt sức.' },
         { text: 'Xóa bài và rút kinh nghiệm.', effect: { nhanThucQuyLuat: 20 }, tone: 'success', msg: 'Nhận ra quy luật Tất nhiên: MXH không phải nơi tranh luận lý tính. Rút lui là thắng.' },
         { text: 'Để bài đó, mặc kệ comment.', effect: { nhanThucQuyLuat: -5 }, tone: 'warn', msg: 'Thụ động. Bài viết tiếp tục gây Kết quả tiêu cực không kiểm soát.' },
       ]

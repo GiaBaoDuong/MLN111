@@ -30,10 +30,10 @@ const generateRun = () => {
 };
 
 const getDynamicTimeLimit = (levelIndex) => {
-  if (levelIndex < 3) return 30; // Dễ
-  if (levelIndex < 6) return 25; // Vừa
-  if (levelIndex < 9) return 20; // Khó
-  return 15; // Cực khó (Câu 10)
+  if (levelIndex < 3) return 65; // Dễ
+  if (levelIndex < 6) return 60; // Vừa
+  if (levelIndex < 9) return 50; // Khó
+  return 45; // Cực khó (Câu 10)
 };
 
 const RadarChart = ({ data }) => {
@@ -109,6 +109,7 @@ const Roleplay = () => {
   const [gameOver, setGameOver] = useState(false);
   const [feedback, setFeedback] = useState(null);
   const [timeLeft, setTimeLeft] = useState(getDynamicTimeLimit(0));
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
   const playSound = (type) => {};
 
@@ -174,6 +175,7 @@ const Roleplay = () => {
     setGameOver(false);
     setFeedback(null);
     setTimeLeft(getDynamicTimeLimit(0));
+    setIsGameStarted(false);
   };
 
   const getEvaluation = () => {
@@ -262,6 +264,14 @@ const Roleplay = () => {
                   <RefreshCcw size={18} /> Chơi lại từ năm Nhất
                 </button>
               </div>
+            ) : !isGameStarted ? (
+              <div className="game-start animate-fade-in">
+                <h2 className="text-gradient">Bạn đã sẵn sàng chưa?</h2>
+                <p>Hành trình từ năm Nhất đến năm Tư đợi ở phía trước. Mỗi quyết định sẽ định hình số phận của bạn!</p>
+                <button className="glass-btn btn-primary-glow" onClick={() => setIsGameStarted(true)}>
+                  <Target size={20} /> Bắt Đầu Cuộc Chơi
+                </button>
+              </div>
             ) : (
               <div className="scenario-content">
                 <div className="scenario-header">
@@ -292,26 +302,28 @@ const Roleplay = () => {
                 <h2 className="scenario-title">{scenario.title}</h2>
                 <p className="scenario-desc">{scenario.description}</p>
 
-                {feedback ? (
-                  <div className={`feedback-box animate-fade-in neon-${feedback.tone}`}>
-                    <p>{feedback.msg}</p>
-                  </div>
-                ) : (
-                  <div className="options-list">
-                    {scenario.options.map((option, idx) => (
-                      <button 
-                        key={idx} 
-                        className="option-btn glass-option hologram-btn" 
-                        onClick={() => handleOptionSelect(option)}
-                        style={{ animationDelay: `${idx * 0.12}s` }}
-                      >
-                        <span className="option-letter">{String.fromCharCode(65 + idx)}</span>
-                        <span className="btn-scanline" aria-hidden="true" />
-                        {option.text}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                <div className="options-feedback-container">
+                  {feedback ? (
+                    <div className={`feedback-box animate-fade-in neon-${feedback.tone}`}>
+                      <p>{feedback.msg}</p>
+                    </div>
+                  ) : (
+                    <div className="options-list">
+                      {scenario.options.map((option, idx) => (
+                        <button 
+                          key={idx} 
+                          className="option-btn glass-option hologram-btn" 
+                          onClick={() => handleOptionSelect(option)}
+                          style={{ animationDelay: `${idx * 0.12}s` }}
+                        >
+                          <span className="option-letter">{String.fromCharCode(65 + idx)}</span>
+                          <span className="btn-scanline" aria-hidden="true" />
+                          {option.text}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </section>
